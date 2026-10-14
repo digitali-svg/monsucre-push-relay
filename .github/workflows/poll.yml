@@ -1,0 +1,21 @@
+name: Poll LibreLinkUp
+
+on:
+  schedule:
+    # GitHub only guarantees "at least this often" during normal load, and
+    # can delay significantly when the platform is busy — still far more
+    # consistent in practice than iOS/watchOS's own background refresh.
+    - cron: "*/5 * * * *"
+  workflow_dispatch: {}
+
+jobs:
+  poll:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Poll and notify
+        env:
+          LIBRELINKUP_EMAIL: ${{ secrets.LIBRELINKUP_EMAIL }}
+          LIBRELINKUP_PASSWORD: ${{ secrets.LIBRELINKUP_PASSWORD }}
+          WORKER_URL: ${{ secrets.WORKER_URL }}
+          REGISTRATION_SECRET: ${{ secrets.REGISTRATION_SECRET }}
+        run: node scripts/poll.mjs
