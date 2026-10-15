@@ -155,7 +155,7 @@ async function main() {
     return;
   }
 
-  if (!state.hasDeviceToken && !state.hasActivityToken) {
+  if (!state.hasDeviceToken && !state.hasWatchDeviceToken && !state.hasActivityToken) {
     console.log("New reading, but no push targets registered yet — nothing to notify.");
     return;
   }

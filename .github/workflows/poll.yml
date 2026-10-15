@@ -2,10 +2,12 @@ name: Poll LibreLinkUp
 
 on:
   schedule:
-    # GitHub only guarantees "at least this often" during normal load, and
-    # can delay significantly when the platform is busy — still far more
-    # consistent in practice than iOS/watchOS's own background refresh.
-    - cron: "*/5 * * * *"
+    # GitHub gives no timing guarantee for `schedule:` at all — confirmed in
+    # practice this ran every 25-50 min despite being set to */5. The real
+    # trigger is now the Cloudflare Worker's own reliable cron calling this
+    # workflow's dispatch API (see cloudflare-worker/wrangler.toml); this is
+    # kept only as an infrequent fallback in case that ever stops working.
+    - cron: "*/30 * * * *"
   workflow_dispatch: {}
 
 jobs:
