@@ -143,7 +143,6 @@ async function workerFetch(path, init) {
 
 async function main() {
   const session = await login(START_REGION, true);
-  console.log(`Account region: ${session.region}`);
   const sample = await fetchLatestSample(session);
   if (!sample) {
     console.log("No sample on the account yet.");
